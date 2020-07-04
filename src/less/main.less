@@ -1,0 +1,351 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1.2;
+}
+ol { 
+	list-style: decimal;
+}
+ul {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+} 
+
+@font-face {
+	font-family: 'MontserratRegular';
+	src: url('/fonts/Montserrat-Regular.eot');
+	src: local('MontserratRegular'), local('MontserratRegular'),
+		url('/fonts/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/Montserrat-Regular.woff') format('woff'),
+		url('/fonts/Montserrat-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	background-color: #fff;
+	font-family: MontserratRegular;
+}
+
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.unselectable {
+	-webkit-touch-callout: none; 
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.add_form_title {
+	text-align: right;
+	padding-right: 10px;
+}
+
+.add_form_select_wrapper {
+	margin:  0 0 20px 0;
+	font-size: 14px;
+}
+
+.add_form_select_wrapper > * {
+	display: inline-block;
+	height: 30px;
+	width: calc(100%/2);
+}
+
+.add_form_select {
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	font-family: MontserratRegular;
+    font-size: 14px;
+}
+
+.add_form > * {
+	display: block;
+}
+
+.add_form_textarea {
+	width: 100%;
+	height: 60px;
+	resize:none;
+	padding: 5px 10px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	font-family: MontserratRegular;
+    font-size: 14px;
+}
+
+.add_form_textarea_info {
+	font-size: 12px;
+	color: lightgray;
+}
+
+.app_header {
+	height: 130px;
+}
+
+.app_link {
+	color: gray;
+}
+
+.app_wrapper {
+	display: flex;
+	margin: auto;
+}
+
+.app_wrapper > * {
+	margin: 0 auto;
+	padding: 0 20px; 
+}
+
+
+.app_active.entering {
+	top: -1000px;
+}
+
+.app_active.entered {
+	top: 0;
+}
+
+.app_active.exiting, .app_active.exited {
+	display: none;
+}
+
+.app_completed.entering {
+	top: -1000px;
+}
+
+.app_completed.entered {
+	top: 0;
+}
+
+.app_completed.exiting, .app_completed.exited {
+	display: none;
+}
+
+.app_active, .app_completed {
+	position: relative;	
+	opacity: 1;
+	transition: 1s
+}
+
+.app_todos_wrapper {
+	flex-basis: 55%;
+	min-width: 500px;
+}
+
+.app_header_wrapper {
+	flex-basis: 45%;
+	min-width: 435px;
+}
+
+.app_header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 0;
+}
+
+.add_form_button {
+	color: white;
+	text-decoration: none;
+	padding: .8em 2em calc(.8em + 3px);
+	border-radius: 3px;
+	background: #7d77f5;
+	box-shadow: 0 -3px #5d58c5 inset;
+	border: 0;
+	cursor: pointer;
+	margin: 20px auto;
+	font-family:  MontserratRegular;
+	font-size: 16px;
+}
+
+.add_form_button:hover { 
+	background: #5d58c5; 
+}
+
+.add_form_button:focus {
+	outline: none;
+}
+
+.app_header_info {
+	flex-grow: 2;
+}
+
+.app_header_title {
+	font-size: 30px;
+	color: #6b65e9;
+	text-transform: capitalize;
+}
+
+.app_header_count, .app_header_month, .add_form_title {
+	color: gray;
+}
+
+[type = 'checkbox'] {
+	display: none;
+}
+
+.checkbox_custom > img {
+	display: none
+}
+
+.checkbox_custom {
+	position: relative;
+	width: 18px;
+	height: 18px;
+	border: 2px solid lightgray; 
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+[type = 'checkbox']:checked + .checkbox_custom > img {
+	position: absolute;
+	width: 13px;
+	height: 13px;
+	display: block;
+	top: 0;
+	bottom: 0;
+	right: 3px;
+	margin: auto;
+}
+
+[type = 'checkbox']:checked + .checkbox_custom {
+	background-color: #7d77f5;
+	border: 0; 
+}
+
+[type='checkbox'] {
+	cursor: pointer;
+}
+
+.app_active > .todos_active::-webkit-scrollbar, .app_copmleted > .todos_copmleted::-webkit-scrollbar {
+	width:0px;
+}
+
+.app_active > .todos_active, .app_copmleted > .todos_copmleted {
+	overflow-x: hidden;
+    overflow-y: scroll;
+    height: calc(100vh - 130px);
+}
+
+.todos_active, .todos_copmleted {
+	padding: 0;
+}
+
+.todos_copmleted > li:first-child > .todo_copmleted {
+	margin-top: 0;
+}
+
+.todo_active_time, .todo_copmleted_time {
+	width: 40px;
+    text-align: right;
+    color: lightgray;
+    font-size: 12px;
+}
+
+.todo_active_name {
+	resize:none;
+}
+
+textarea.todo_active_name {
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	color: #000;
+	font-family: MontserratRegular;
+    font-size: 14px;
+}
+
+.todo_active_controls, .todo_copmleted_controls {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	right: 0;
+	height: 100%;
+	max-width: 255px;
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+}
+
+.todo_active, .todo_copmleted {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	min-height: 70px;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	margin: 5px 0;
+	padding: 5px 0;
+	position: relative;
+}
+
+.todo_active > *, .todo_copmleted > * {
+	padding: 5px 10px;
+}
+
+.todo_active.childs {
+	margin-left: 20px;
+	background-color: #fbf7f7;
+}
+
+.todo_copmleted_undrline {
+	text-decoration: line-through
+}
+
+.todo_active_delete {
+	display: inline-block;
+	color: red;
+	width: 70px;
+	cursor: pointer;
+}
+
+.todo_active_edit {
+	display: inline-block;
+	width: 120px;
+	cursor: pointer;
+}
+
+.todo_copmleted_recover {
+	cursor: pointer;
+	width: 110px
+}
+
+.todo_copmleted_name {
+	color: lightgray;
+}
+
+.todo_active_name {
+	color: gray;
+}
+
+.todo_active_name, .todo_copmleted_name  {
+	flex-basis: calc(100% - 290px);
+	width: calc(100% - 290px);
+	overflow-wrap: break-word;
+}
