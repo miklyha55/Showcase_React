@@ -32,6 +32,8 @@ export default class App extends React.Component {
 			url: "http://krapipl.imumk.ru:8082/api/mobilev1/update",
 
 			success: function(data) {
+
+
 				this.setState({
 					isLoaded: true,
 					items: data.items,
@@ -40,6 +42,17 @@ export default class App extends React.Component {
 					subjects: this.getUnicSubject(data.items),
 					load: false
 				});
+
+				if(localStorage.getItem('state')) {
+					const state = JSON.parse(localStorage.getItem('state'))
+					this.state.grade = state.grade
+					this.state.genre = state.genre
+					this.state.subject = state.subject
+					this.state.search = state.search
+					this.state.switcher = state.switcher
+					this.filterItems.bind(this)()
+				}
+
 			}.bind(this),
 
 			error: function(xhr, status, error) {
@@ -108,6 +121,7 @@ export default class App extends React.Component {
 	}
 
 	filterItems() {
+
 		const filter = this.state.items.filter((item) => {
 			const grade = this.state.grade ? item.grade.split(';').includes(this.state.grade) : true
 			return grade && 
@@ -117,13 +131,27 @@ export default class App extends React.Component {
 		});
 
 		this.setState({ filter })
+		this.setLocalState.bind(this)()
 
+	}
+
+	setLocalState() {
+
+		const state = {
+			grade: this.state.grade,
+			genre: this.state.genre,
+			subject: this.state.subject,
+			search: this.state.search,
+			switcher: this.state.switcher
+		}
+
+		localStorage['state'] = JSON.stringify(state)
 	}
 
 	handlerSwitchPrice() {
 
 		const switcher = this.state.switcher ? false : true
-		this.setState({ switcher })
+		this.setState({ switcher }, this.setLocalState.bind(this))
 
 	}
 
@@ -137,7 +165,7 @@ export default class App extends React.Component {
 					<div className='app_wrapper'>
 						<div className='app_filter d-flex justify-content-center flex-wrap'>
 
-							<select className='m-3 form-control' id='grade' onChange={ this.handlerGrade.bind(this) }>
+							<select value={ this.state.grade } className='m-3 form-control' id='grade' onChange={ this.handlerGrade.bind(this) }>
 								<option value=''>Все классы</option>
 								<option value='1' >1 класс</option>
 								<option value='2' >2 класс</option>
@@ -152,22 +180,22 @@ export default class App extends React.Component {
 								<option value='11' >11 класс</option>
 							</select>
 
-							<select className='m-3 form-control' id='genre' onChange={ this.handlerGenre.bind(this) }>
+							<select value={ this.state.genre } className='m-3 form-control' id='genre' onChange={ this.handlerGenre.bind(this) }>
 								<option value=''>Все жанры</option>
 								{ this.state.genres.map((item, index) => {
 									return (<option key={ index } value={ item } >{ item }</option>)
 								}) }
 							</select>
 
-							<select className='m-3 form-control' id='subject' onChange={ this.handlerSubject.bind(this) }>
+							<select value={ this.state.subject } className='m-3 form-control' id='subject' onChange={ this.handlerSubject.bind(this) }>
 								<option value=''>Все предметы</option>
 								{ this.state.subjects.map((item, index) => {
 									return (<option key={ index } value={ item } >{ item }</option>)
 								}) }
 							</select>
 
-							<input className='m-3 form-control' type="text" placeholder='Поиск по title' onChange={ this.handlerSearch.bind(this) }/>
-							<label className='m-0 d-flex justify-content-between align-items-center' htmlFor='checkbox'>Переключить цену: <input className='m-3' type='checkbox' id='checkbox' onChange={ this.handlerSwitchPrice.bind(this) }/></label>
+							<input value={ this.state.search } className='m-3 form-control' type="text" placeholder='Поиск по title' onChange={ this.handlerSearch.bind(this) }/>
+							<label className='m-0 d-flex justify-content-between align-items-center' htmlFor='checkbox'>Переключить цену: <input className='m-3' type='checkbox' id='checkbox' checked={ this.state.switcher } onChange={ this.handlerSwitchPrice.bind(this) }/></label>
 
 						</div>
 
@@ -196,5 +224,4 @@ export default class App extends React.Component {
 
 	    )
    	}
-
 }
